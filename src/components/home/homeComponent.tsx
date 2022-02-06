@@ -1,7 +1,19 @@
 import { Paper } from '@mui/material';
+import { connect } from 'react-redux';
 import * as React from 'react'
+import { selectHomeState } from '../../redux/home/selectors';
+import { TAppState } from '../../types/appState';
 
-const HomeComponent = () => {
+type TProps = {
+  home: any
+}
+
+const mapStateToProps = (state: TAppState) => ({
+  home: selectHomeState(state)
+})
+
+const HomeComponent: React.FunctionComponent<TProps> = ({ home }) => {
+
   return (
       <>
       <Paper elevation={3}>
@@ -11,5 +23,5 @@ const HomeComponent = () => {
   )
 };
 
-export default HomeComponent
+export default connect(mapStateToProps)(HomeComponent)
 

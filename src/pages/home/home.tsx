@@ -1,3 +1,8 @@
 
+import HomeComponent from "../../components/home/homeComponent";
 
-export const Home = () => (<><h1>Home</h1></>);
+
+
+const Home: React.FunctionComponent = () => (<HomeComponent />);
+
+export default Home

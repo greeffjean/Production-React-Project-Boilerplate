@@ -1,19 +1,31 @@
 
 import { Container } from '@mui/material';
 import React, { FunctionComponent } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { routesMap } from '../../utils/routes.utils';
 
+type TProps = {
+    props: any
+}
 
-const Home = React.lazy(() => import('../home/homeComponent'))
+const TheContent: FunctionComponent<TProps> = ({ props }) => {
 
-const TheContent: FunctionComponent = () => {
-  return (
-  <Container>
-      <Route path={'/home'} component={Home} />
-      <Redirect from={'/'} to={'/home'}/> 
-   </Container>
+    // Map over allowed routes and add to App respectively
+    const routes = [];
+    for (const [key, value] of Object.entries(props.userAccess)) {
+        console.log(key)
+        value && routes.push(routesMap[key])
+    }
+
+    console.log(routes)
+
+    return (
+        <Container>
+            {routes}
+            <Redirect from={'/'} to={'/home'} />
+        </Container>
     )
 };
 
-    export default TheContent
+export default TheContent
 
