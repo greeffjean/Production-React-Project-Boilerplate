@@ -5,7 +5,10 @@ import NavigationComponent from './components/common/navigation/navigation.compo
 import Body from './components/layout/Body';
 import Login from './pages/login/login';
 
-const token = localStorage.getItem('token') ? localStorage.getItem('token') : true;
+
+// Uncomment for Development 
+// const token = localStorage.getItem('token') ? localStorage.getItem('token') : true;
+const token = true;
 
 const Router = () => {
         return (

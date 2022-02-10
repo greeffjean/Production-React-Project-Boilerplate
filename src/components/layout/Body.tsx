@@ -17,7 +17,7 @@ const Body: FunctionComponent<TProps> = (props) => {
       
       return (
             <>
-                  <TheContent props={props}/>
+                  <TheContent/>
             </>
       )
 };

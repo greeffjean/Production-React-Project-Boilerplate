@@ -1,23 +1,27 @@
 
 import { Container } from '@mui/material';
 import React, { FunctionComponent } from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { selectUserAccess } from '../../redux/user/selectors';
+import { TAppState } from '../../types/appState';
 import { routesMap } from '../../utils/routes.utils';
 
 type TProps = {
-    props: any
-}
+    userAccess: { [key: string]: boolean }
+  };
+  
+  const mapStatetoProps = (state: TAppState) => ({
+    userAccess: selectUserAccess(state)
+  })
 
-const TheContent: FunctionComponent<TProps> = ({ props }) => {
+const TheContent: FunctionComponent<TProps> = ({ userAccess }) => {
 
     // Map over allowed routes and add to App respectively
     const routes = [];
-    for (const [key, value] of Object.entries(props.userAccess)) {
-        console.log(key)
+    for (const [key, value] of Object.entries(userAccess)) {
         value && routes.push(routesMap[key])
     }
-
-    console.log(routes)
 
     return (
         <Container>
@@ -27,5 +31,5 @@ const TheContent: FunctionComponent<TProps> = ({ props }) => {
     )
 };
 
-export default TheContent
+export default connect(mapStatetoProps)(TheContent)
 

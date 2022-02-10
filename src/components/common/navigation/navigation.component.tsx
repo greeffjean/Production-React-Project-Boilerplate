@@ -7,12 +7,31 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import './style/style.css';
+import { TAppState } from '../../../types/appState';
+import { selectUserAccess } from '../../../redux/user/selectors';
+import { connect } from 'react-redux';
+import { linksMap } from '../../../utils/routes.utils';
 
+type TProps = {
+  userAccess: { [key: string]: boolean }
+};
 
+const mapStatetoProps = (state: TAppState) => ({
+  userAccess: selectUserAccess(state)
+})
 
-const NaviagtionComponent: FunctionComponent = () => {
-return <>
-  <Box sx={{ flexGrow: 1 }}>
+const NaviagtionComponent: FunctionComponent<TProps> = ({
+  userAccess
+}) => {
+
+  const links: JSX.Element[] = [];
+  for (const [key, value] of Object.entries(userAccess)) {
+    value && links.push(linksMap[key])
+}
+  
+  return <>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -24,14 +43,11 @@ return <>
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
+          {links}
         </Toolbar>
       </AppBar>
     </Box>
-</>
+  </>
 };
 
-export default NaviagtionComponent
+export default connect(mapStatetoProps)(NaviagtionComponent)

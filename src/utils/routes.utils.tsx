@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 
 // Enums for Routes
 export enum routePaths {
@@ -8,7 +8,7 @@ export enum routePaths {
     DASHBOARD_TWO = '/dashboard-two',
 }
 
-export enum routeTags {
+export enum routeTitles {
     HOME = 'Home',
     DASHBOARD_ONE = 'Dashboard One',
     DASHBOARD_TWO = 'Dashboard Two',
@@ -21,8 +21,15 @@ const DashboardTwo = React.lazy(() => import('../pages/dashboardTwo/dashboardTwo
 
 // Route map
 export const routesMap: { [key: string]: JSX.Element } = {
-    home: <Route key={routeTags.HOME} path={routePaths.HOME} component={Home} />,
-    dashboardOne: <Route key={routeTags.DASHBOARD_ONE} path={routePaths.DASHBOARD_ONE} component={DashboardOne} />,
-    dashboardTwo: <Route key={routeTags.DASHBOARD_TWO} path={routePaths.DASHBOARD_TWO} component={DashboardTwo}/>
+    home: <Route key={routeTitles.HOME} path={routePaths.HOME} component={Home} />,
+    dashboardOne: <Route key={routeTitles.DASHBOARD_ONE} path={routePaths.DASHBOARD_ONE} component={DashboardOne} />,
+    dashboardTwo: <Route key={routeTitles.DASHBOARD_TWO} path={routePaths.DASHBOARD_TWO} component={DashboardTwo}/>
+}
+
+// Links Map
+export const linksMap: { [key: string]: JSX.Element } = {
+    home: <Link key={routeTitles.HOME} to={routePaths.HOME}>{routeTitles.HOME}</Link>,
+    dashboardOne: <Link key={routeTitles.DASHBOARD_ONE} to={routePaths.DASHBOARD_ONE}>{routeTitles.DASHBOARD_ONE}</Link>,
+    dashboardTwo: <Link key={routeTitles.DASHBOARD_TWO} to={routePaths.DASHBOARD_TWO}>{routeTitles.DASHBOARD_TWO}</Link>,
 }
     
