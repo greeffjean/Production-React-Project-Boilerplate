@@ -1,8 +1,16 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent } from "react";
 
-
-const LoginComponent: FunctionComponent = () => {
-return <><h1>This is the Login Page</h1></>
+export type TLoginProps = {
+  greeting: string;
 };
 
-export default LoginComponent
+const LoginComponent: FunctionComponent<TLoginProps> = ({ greeting }) => {
+  return (
+    <>
+      <h1 role="welcomeHeading">This is the Login Page!</h1>
+      <span role="userGreeting">{greeting}</span>
+    </>
+  );
+};
+
+export default LoginComponent;

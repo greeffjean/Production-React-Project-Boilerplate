@@ -28,8 +28,8 @@ export const routesMap: { [key: string]: JSX.Element } = {
 
 // Links Map
 export const linksMap: { [key: string]: JSX.Element } = {
-    home: <Link key={routeTitles.HOME} to={routePaths.HOME}>{routeTitles.HOME}</Link>,
-    dashboardOne: <Link key={routeTitles.DASHBOARD_ONE} to={routePaths.DASHBOARD_ONE}>{routeTitles.DASHBOARD_ONE}</Link>,
-    dashboardTwo: <Link key={routeTitles.DASHBOARD_TWO} to={routePaths.DASHBOARD_TWO}>{routeTitles.DASHBOARD_TWO}</Link>,
+    home: <Link data-testid="link" key={routeTitles.HOME} to={routePaths.HOME}>{routeTitles.HOME}</Link>,
+    dashboardOne: <Link data-testid="link" key={routeTitles.DASHBOARD_ONE} to={routePaths.DASHBOARD_ONE}>{routeTitles.DASHBOARD_ONE}</Link>,
+    dashboardTwo: <Link data-testid="link" key={routeTitles.DASHBOARD_TWO} to={routePaths.DASHBOARD_TWO}>{routeTitles.DASHBOARD_TWO}</Link>,
 }
     

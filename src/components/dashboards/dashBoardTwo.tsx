@@ -6,6 +6,7 @@ const DashboardTwoComponent: React.FunctionComponent = () => {
       <>
       <Paper elevation={3}>
           <h1>Welcome to Dashboard Two!</h1>
+          <span role="access">Private Access!</span>
       </Paper>
       </>
   )
