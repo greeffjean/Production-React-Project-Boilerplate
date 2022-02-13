@@ -1,1 +1,1 @@
-export type Data = { [key: string]: string | number | (string | number)[] }
+export type TData = { [key: string]: string | number | (string | number)[] }

@@ -1,22 +1,46 @@
 import { Paper } from "@mui/material";
-import axios from "axios";
 import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { taxCalc } from "../../custom/hooks/taxCalc";
+import { requestBoilerPlateData } from "../../redux/boilerPlate/actions";
+import {
+  selectBoilerPlateData,
+  selectBoilerPlateError,
+  selectBoilerPlateIsLoading,
+} from "../../redux/boilerPlate/selectors";
+import { TAppState } from "../../types/appState";
+import { TData } from "../../types/commonTypes";
 
-const BoilerPlateComponent: React.FunctionComponent = () => {
+const mapStateToProps = (state: TAppState) => ({
+  isLoading: selectBoilerPlateIsLoading(state),
+  data: selectBoilerPlateData(state),
+  error: selectBoilerPlateError(state),
+});
+
+const mapDispatchToProps = { requestBoilerPlateData };
+
+type TBoilerPlateProps = {
+  isLoading: boolean;
+  data: TData | null;
+  error: any;
+  requestBoilerPlateData: () => void;
+};
+
+const BoilerPlateComponent: React.FunctionComponent<TBoilerPlateProps> = ({
+  data,
+  error,
+  isLoading,
+  requestBoilerPlateData,
+}) => {
   const [count, setCount] = React.useState<number>(0);
-  const [data, setData] = React.useState<any>(null);
   const { nett, updateIncome } = taxCalc("ZAR", 45000);
 
   useEffect(() => {
     let isMounted = true;
-    axios.get(
-      "https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=15"
-    ).then((resp) => {
-      resp.status === 200 && isMounted && setData(resp.data.toString())
-    }).catch((err) => console.error(err))
-
-    return(() => { isMounted = false })
+    isMounted && requestBoilerPlateData()
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleUpdateIncome = (income: number) => {
@@ -66,4 +90,4 @@ const BoilerPlateComponent: React.FunctionComponent = () => {
   );
 };
 
-export default BoilerPlateComponent;
+export default connect(mapStateToProps, mapDispatchToProps)(BoilerPlateComponent);
